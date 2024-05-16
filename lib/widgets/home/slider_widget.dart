@@ -18,7 +18,7 @@ class SliderWidget extends StatelessWidget {
           itemCount: imagePath.length,
           options: CarouselOptions(
             height: 300,
-            autoPlay: true,
+            // autoPlay: true,
             viewportFraction: 0.55,
             enlargeCenterPage: true,
             pageSnapping: true,

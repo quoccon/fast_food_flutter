@@ -29,7 +29,8 @@ class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController passwordController = TextEditingController();
   late AuthCubit authCubit;
   bool isLogin = false;
-
+  bool showError = false;
+  String errorMessage = "";
   @override
   Widget build(BuildContext context) {
     authCubit = context.read<AuthCubit>();
@@ -39,9 +40,11 @@ class _LoginScreenState extends State<LoginScreen> {
           setState(() {
             isLogin = true;
           });
-          Future.delayed(Duration(seconds: 2), () {
-            Navigator.pushReplacement(context,
-                MaterialPageRoute(builder: (context) => const HomePage()));
+        }else if(state is AuthError){
+          setState(() {
+            isLogin = false;
+            showError = true;
+            errorMessage = state.error;
           });
         }
       },
@@ -119,6 +122,11 @@ class _LoginScreenState extends State<LoginScreen> {
                           const SizedBox(
                             height: 10.0,
                           ),
+
+                          Visibility(
+                            visible: showError,
+                            child: Text(errorMessage,style: const TextStyle(color: Colors.red),),
+                          ),
                           GestureDetector(
                             onTap: () {},
                             child: const Text("Forgot password?",
@@ -130,7 +138,12 @@ class _LoginScreenState extends State<LoginScreen> {
                           GestureDetector(
                             onTap: () {
                               authCubit.login(emailController.text,
-                                  passwordController.text, (user) {});
+                                  passwordController.text, (user) {
+                                    Future.delayed(const Duration(seconds: 2), () {
+                                      Navigator.pushReplacement(context,
+                                          MaterialPageRoute(builder: (context) => HomePage(user:user)));
+                                    });
+                                  });
                             },
                             child: Container(
                               width: MediaQuery.of(context).size.width,

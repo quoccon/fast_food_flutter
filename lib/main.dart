@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:food_client/page/auth/login_page.dart';
+import 'package:food_client/page/home_page.dart';
 import 'package:food_client/plash_screen.dart';
+import 'package:food_client/widgets/menu/slider_menu.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,7 +20,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const SplashScreen(),
+      home: const LoginPage(),
     );
   }
 }

@@ -19,7 +19,7 @@ class _SearchWidgetState extends State<SearchWidget> {
             minHeight: 40,
             minWidth: 40
         ),
-        hintText: "Search here...",
+        hintText: "Hôm nay bạn muốn ăn gì...",
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(30.0),
         ),
